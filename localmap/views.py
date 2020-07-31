@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
-import numpy as np
 
-addresscode = 13103         #デフォルト東京都小平市
+addresscode = 13103         #デフォルト東京都港区
 
 def convert_1d_to_2d(l, cols):
     return [l[i:i + cols] for i in range(0,len(l),cols)]
