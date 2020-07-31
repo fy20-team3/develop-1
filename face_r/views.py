@@ -80,4 +80,51 @@ def scan(request):
 
     return render(request, 'myhello/Scan.html', {'pcode': pcode, 'place': place})
 
+def dbtest(request):
+    #return HttpResponse('dbtest 始まるよ')
+    # MySQL接続
+    cnt = mysql.connector.connect(
+        host='mysql-server-60149727.mysql.database.azure.com',
+        port='3306',
+        db='citycode',
+        user='fy20user@mysql-server-60149727',
+        password='fy20P@ssw0rd',
+        charset='utf8'
+    )
+
+    # カーソル取得
+    db = cnt.cursor(buffered=True)
+
+    id = 10
+    #id 
+    
+    # SQLクエリ実行（データ取得）
+    sql = "SELECT todoufuken FROM citycode WHERE id='" + id + ';';
+    db.execute(sql)
+    # 表示
+    todoufuken = db.fetchall()
+    print(todoufuken)
+
+    # SQLクエリ実行（データ取得）
+    sql = "SELECT sikuchoson FROM citycode WHERE id='" + id + ';';
+    db.execute(sql)
+    # 表示
+    sikuchoson = db.fetchall()
+    print(sikuchoson)
+
+    place = todoufuken + sikuchoson
+
+    print(place)
+
+    # カーソル終了
+    db.close()
+    # MySQL切断
+    cnt.close()
+
+    return httpResponce('placepowershellを確認')
+
+
+def phototest(request):
+    return render(request, 'photoform.html')
+
 # Create your views here.
