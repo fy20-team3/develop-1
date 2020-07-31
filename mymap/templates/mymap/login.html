@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+
+{% load static %}　<!--スタティックファイルの読み込み-->
+{% block css %}　　<!--スタティックファイルの中のlogin.cssの読み込みCSS-->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- 作成したCSS適応 -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock css %}　
+{% block content %}　
+
+
+<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+<!-- タイトルにloginと表示 -->
+<title>login</title>
+
+<body>
+<div>
+<div class="login">Login</div>
+<!--a hrefに飛びたいページのULRを記述　　nemaespace:name　APの中のurlsを編集-->
+<a href="{% url 'mymap:signup' %}" class="newuser">
+    <i class="fa fa-caret-right"></i> Create Account
+</a>
+</div>
+
+<div class="container">
+    <div class="loginPage_contents">
+        <br><hr><br>
+        <form action="" method="POST">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            <p>{{ field.label}}</p>
+                            {{ field }}
+                            {{ field.errors }}
+                            <hr>
+                        {% endfor %}
+                        <button type="submit" class="btn common-btn" >ログイン</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        {% csrf_token %}
+                    </div>
+                </div>
+            </div>
+        </form>
+        <Hr>
+    </div>
+</div>
+{% endblock %}
+</body>
+<html>
