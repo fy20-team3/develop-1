@@ -19,4 +19,6 @@ from .import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('scan/', views.scan, name='scan'),
+    path('dbtest/', views.dbtest, name='dbtest'),
+    path('phototest/', views.phototest, name='phototest')
 ]
