@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<title>サンプル</title>
+</head>
+<body>
+<form method="post" action="upload.php" enctype="multipart/form-data">
+  <p>
+    <input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
+    <span style="color: #ff0000;" data-mce-style="color: #ff0000;"><div><img id="thumbnail" src=""></div></span>
+  </p>
+  <p><input type="submit" name="save" value="保存" /></p>
+</form>
+ 
+<script>
+$('#upfile').change(function(){
+  if (this.files.length > 0) {
+    // 選択されたファイル情報を取得
+    var file = this.files[0];
+    
+    // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    
+    reader.onload = function() {
+      $('#thumbnail').attr('src', reader.result );
+    }
+  }
+});
+</script>
+</body>
+</html>
