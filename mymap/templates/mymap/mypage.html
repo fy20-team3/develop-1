@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--背景色設定
+<div class="deepFocus">-->
+<!--タイトル名設定-->
+<title>mypage</title>
+
+
+{% load static %}
+
+  <!-- 作成したCSS適応 -->
+<link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+<link rel="stylesheet"  type="text/css" href="{% static 'css/mymap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+
+
+<!--java script-->　
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+<script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+
+
+ <body>
+
+ <!--メニューバー設定-->
+ <div class="hamberger_menu">
+ 
+  <!-- 三本線 -->
+ 
+  <div class="hamberger_line">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+
+  <!-- クリックしたときのメニュー -->
+  
+  <nav class="hamberger_list">
+      <ul>
+        <li><a href="{% url 'mymap:index' %}">Home</a></li>
+        <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+        <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+        <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+        {% endif %}
+      </ul>
+  </nav>
+
+
+<div class="container">
+   <div class="loginPage_contents">
+   <h1 class="h3 loginPage_contents_title">My Page</h1> 
+   <br><hr><br>
+   <p>旅行プラン一覧</p>
+</div>
+                 
+<!--下記からマップ関係-->
+<!--マップの大きさ変更-->
+<div id="map" style="width:500px; height:400px; "></div>
+
+
+<!--yahoomapの呼び出し、表示-->
+
+<script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
+
+<script type="text/javascript">
+/*地図サイズ変更表示設定*/
+
+/*ここからがマップ設定*/
+window.onload = function(){
+   var ymap = new Y.Map("map", {
+   configure : {
+       doubleClickZoom : true,
+       scrollWheelZoom : true,
+       singleClickPan : true,
+       dragging : true
+   }
+ });
+ /*defaultでどこを表示するか*/
+ ymap.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
+ 
+ /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
+ ymap.addControl(new Y.HomeControl());
+ ymap.addControl(new Y.LayerSetControl());
+ ymap.addControl(new Y.SearchControl());
+ ymap.addControl(new Y.SliderZoomControlVertical());
+ ymap.addControl(new Y.CenterMarkControl());
+ window.bind("resize", function(e){
+       ymap.updateSize(max);
+   });
+}
+</script>
+
+<footer>
+   <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+ </footer>
+
+ 
+</body>
+</html>

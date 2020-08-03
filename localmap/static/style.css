@@ -1,0 +1,33 @@
+body{
+    /* background: white url("HPE_LOGO.jpg") no-repeat; */
+    background-color: aquamarine;
+}
+
+div.img-hidden{
+    height: 300px;
+    overflow: hidden;
+    background-image: url("sky_01.jpg");
+    text-align: left;
+}
+
+h1{
+    color: white;
+    font-family: serif;
+}
+h3{
+    color: white;
+    font-family: serif;   
+}
+
+div.container-m{
+    margin-top: 80px;
+    text-align: center;
+}
+
+div.container-b{
+    margin-bottom: 80px;
+}
+
+div.container-c{
+    margin-top: 60px;
+}

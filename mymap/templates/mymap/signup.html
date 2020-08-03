@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<!--スタティックファイルの読み込み-->
+{% load static %}
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- 作成したCSS適応 -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/traveltop.css' %}">
+
+<!--java script-->　
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+<script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
+
+<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<body>
+      
+<!--メニューバー設定-->
+    <div class="hamberger_menu">
+    
+<!-- 三本線 -->
+    
+     <div class="hamberger_line">
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+     </div>
+   
+<!-- クリックしたときのメニュー -->
+     
+     <nav class="hamberger_list">
+         <ul>
+           <li><a href="{% url 'mymap:index' %}">Home</a></li>
+           <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
+           {% if user.is_authenticated %}
+           <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+           {% else %}
+           <li class="nav-item">
+           <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+           <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+           {% endif %}
+         </ul>
+     </nav>
+
+
+
+<!--create account設定フォーム-->
+<div class="container">
+    <div class="loginPage_contents">
+        <h1 class="h3 loginPage_contents_title">Create New Account</h1>
+        <br><hr><br>
+        <form action="" method="POST">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            <p>{{ field.label}}</p>
+                            {{ field }}
+                            {{ field.errors }}
+                            <hr>
+                        {% endfor %}
+                        <button type="submit" class="btn common-btn" >登録してログイン</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        {% csrf_token %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>   
+
+<footer>
+	<address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+</footer>
+
+
+</body>
+</html>

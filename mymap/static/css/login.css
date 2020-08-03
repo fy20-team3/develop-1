@@ -1,0 +1,43 @@
+
+    .login {
+    color: #333333;
+    font-size: 2em;
+    float: left;
+    width: 50%;
+    background-color: rgb(192, 192, 192);
+    }
+    
+    .newuser{
+        color: 888888;
+        text-align: right;
+        font-size: 1.5em;
+        float: right;
+        width: 50%;
+        background-color: #333333;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        position: relative;
+        display: inline-block;
+        font-weight: bold;
+        padding: 0.25em 0.5em;
+        text-decoration: none;
+        color: #333333;
+        background:  rgb(192, 192, 192);
+        transition: .4s;
+     }
+
+     .btn-flat-simple:hover {
+        background: #00bcd4;
+        color: #333333;
+      }
+
+      .loginPage_contents {
+      
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+     }
+     .loginPage_contents_title {
+        margin-top: 12vh;
+     }
+     
+

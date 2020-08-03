@@ -1,0 +1,95 @@
+<!doctype html>
+<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--背景色設定
+<div class="deepFocus">-->
+<!--タイトル名設定-->
+<title>toppage</title>
+
+
+{% load static %}
+<head>
+  <!-- 作成したCSS適応 -->
+<link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+
+<!--java script-->　
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+<script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+
+</head>
+
+  
+
+
+<html>
+<header>
+<h1>
+    <header class="grovalNavigation">
+    <p>TRAVEL API</p>
+</h1>
+</header>
+
+ <body>
+
+ <!--メニューバー設定-->
+ <div class="hamberger_menu">
+ 
+  <!-- 三本線 -->
+ 
+  <div class="hamberger_line">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+
+  <!-- クリックしたときのメニュー -->
+  
+  <nav class="hamberger_list">
+      <ul>
+        <li><a href="{% url 'mymap:index' %}">Home</a></li>
+        <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+        <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+        <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+        {% endif %}
+      </ul>
+  </nav>
+
+</div></div>
+
+<!--スライドショー-->
+<div class="main_imgBox">
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock1.jpg' %}"></div>
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock2.jpg' %}"></div>
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock3.jpg' %}"></div>
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock4.jpg' %}"></div>
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock5.jpg' %}"></div>
+<div class="main_img" style="background-image"> 
+<img src="{% static 'image/AdobeStock6.jpg' %}"></div>
+
+</div>
+
+<footer>
+  <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+</footer>
+
+</body>
+</html>
