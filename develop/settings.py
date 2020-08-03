@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mymap.apps.MymapConfig',
-    'face_r.apps.Face_rConfig',
+    'face_r.apps.FaceRConfig',
     'localmap.apps.LocalmapConfig',
     'routesearch.apps.RoutesearchConfig',
     'django.contrib.admin',
