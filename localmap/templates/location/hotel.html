@@ -1,11 +1,82 @@
+{% load static %}
+<link rel="stylesheet" type7="text/css" href="{% static 'style.css' %}">
+
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  
+      <title>Select Hotel</title>
+  </head>
 
-    <h1>宿</h1>
-    <h2>住所コード{{ city }}の宿検索結果</h2>
+  
 
-    <p>{{ resulth | linebreaksbr }}</p>
+  <body>
+    <div class="container-fluid img-hidden">
+      <h1>宿</h1>
+      <h3>住所コード{{ city }}の宿検索結果</h3>
+    </div>
+
+    <div class="container container-m">
+      <div class="alert alert-info" role="alert">
+        ホテルを１つ選択できます
+      </div>
+    </div>
+
+    <!-- <p>選択したスポット<span id="span2"></span></p>
+
+    <input type="button" class="btn btn-info" value="ボタン" onclick="clickBtn2()"> -->
+   
+
+    <div class="container container-b">
+      <form action="{% url 'tripplan' %}" method="POST" enctype="multipart/form-data" name="form2">
+        <div class="row">
+        {% for x in resulthotel %}
+          <div class="col-sm-4 container-c">
+            <input type="radio" name="spot2" value={{forloop.counter0}} >
+            <div class="card h-250 bg-success mb-3">
+              <div class="card-body text-white">
+                <h5 class="card-title">{{x.1}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{x.4}}{{x.5}}</li>
+                <li class="list-group-item">{{x.6}}{{x.7}}</li>
+                <li class="list-group-item">{{x.8}}{{x.9}}</li>
+                <li class="list-group-item">{{x.10}}{{x.11}}</li>
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+        <br><br>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
+          プラン出力画面へ
+        </button>
+      </form>
+    </div>
+
+
+    <script>
+      function clickBtn2(){
+        let str = "";
+        const spot2 = document.form2.spot2;
+
+        for(let i=0; i < spot2.length; i++){
+          if(spot2[i].checked){
+            str = spot2[i].value;
+            break;
+          }
+        }
+        document.getElementById("span2").textContent = str;
+      }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
