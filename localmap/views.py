@@ -176,14 +176,15 @@ def tripplan(request):
     # print("hoteldst:",hoteldst)
 
     hoteloutput = []
-    for x in range(len(hoteldst)):
-        hoteloutput.append(resulthotel[x])
+    hoteloutput.append(resulthotel[hoteldet[0]])
 
     print(hoteloutput)
 
     spotoutput = []
     for x in range(len(spotdst)):
-        spotoutput.append(result[x])
+        i = spotdst[x]
+        print(i)
+        spotoutput.append(result[i])
 
     print(spotoutput)
 
