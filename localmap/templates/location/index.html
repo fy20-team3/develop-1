@@ -1,29 +1,96 @@
+
+{% load static %}
+<link rel="stylesheet" type7="text/css" href="{% static 'style.css' %}">
+
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <h1>結果</h1>
-    <h2>住所コード{{ address }}の検索結果</h2>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    {% for x in result %}
-      <input type="checkbox">
-      {{x.0}}{{x.1}} <br>
-      {{x.3}}{{x.4}} <br>
-      {{x.6}}{{x.7}} <br>
-      {{x.9}}{{x.10}} <br>
-      {{x.12}}{{x.13}} <br>
-      {{x.15}}{{x.16}} <br>
-      <br><br>
-    {% endfor %}
-      
+    <title>Select Spot</title>
+  </head>
+
+  
+
+  <body>
+    <div class="container-fluid img-hidden">
+      <h1>Select View Spot</h1>
+      <h3>住所コード{{ address }}の検索結果</h3>
+    </div>
+
+    <div class="container container-m">
+      <div class="alert alert-info" role="alert">
+        観光地を最大１０個選択できます
+      </div>
+    </div>
+
+
+    
+    <!-- <p>選択したスポット番号<span id="span1"></span></p>
+
+    <input type="button" class="btn btn-info" value="ボタン" onclick="clickBtn1()"> -->
+    
+
+
+    <div class="container container-b">
+      <form action="{% url 'hotelspot' %}" method="POST" enctype="multipart/form-data" name="form1">
+        <div class="row">
+        {% for x in result %}
+          <div class="col-sm-4 container-c">
+            <input type="checkbox" name="spot1" value= {{forloop.counter0}} >
+            <div class="card h-250 bg-info mb-3">
+              <div class="card-body text-white">
+                <h5 class="card-title">{{x.1}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{x.4}}{{x.5}}</li>
+                <li class="list-group-item">{{x.6}}{{x.7}}</li>
+                <li class="list-group-item">{{x.8}}{{x.9}}</li>
+                <li class="list-group-item">{{x.10}}{{x.11}}</li>
+              </ul>
+            </div>            
+          </div>
+        {% endfor %}
+        </div>
+        <br><br>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
+          ホテル選択へ
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function clickBtn1(){
+        // const arr0 = [];
+        const arr1 = [];
+        // const spot0 = document.form1.spot0;
+        const spot1 = document.form1.spot1;
+
+        for(let i=0; i < spot1.length; i++){
+          if(spot1[i].checked){
+            arr1.push(spot1[i].value);
+          }
+        }
+        document.getElementById("span1").textContent = arr1;
+      }
+    </script>
     
     
     <!--<p>{{ result | linebreaksbr }}</p>-->
 
-    <form action="{% url 'hotelspot' %}" method="POST" enctype="multipart/form-data">
+    <!-- <form action="{% url 'hotelspot' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <button>ホテル選択へ</button>
-    </form>
+      <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
+        ホテル選択へ
+      </button>
+    </form> -->
   
 
     <!-- Optional JavaScript -->
