@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html>
 
@@ -25,61 +25,63 @@
 
 
 
-<!--タイトル名設定-->
- <head>
-  <title>overview</title>
-</head>
+<!-- タイトルにloginと表示 -->
+<title>overview</title>
 
- 
 
-<!--メニューバー以下の設定-->
+
+      
+      
+      
+      
 <body>
-
-
- <!--メニューバー設定-->
- <div class="hamberger_menu">
+      
+       <!--メニューバー設定-->
+       <div class="hamberger_menu">
        
-  <!-- 三本線 -->
- 
-  <div class="hamberger_line">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-  </div>
+        <!-- 三本線 -->
+       
+        <div class="hamberger_line">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      
+<!-- クリックしたときのメニュー -->
+<nav class="hamberger_list">
+  <ul>
+    <li><a href="{% url 'mymap:index' %}">Home</a></li>
+    <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
+    {% if user.is_authenticated %}
+    <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+    <li><a class="nav-item nav-link" href="../../form">Travel planning</a></li>
+    <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+    {% else %}
+    <li class="nav-item">
+    <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+    <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+    {% endif %}
+  </ul>
+</nav>       
+        
 
-  <!-- クリックしたときのメニュー -->
-  
-  <nav class="hamberger_list">
-      <ul>
-        <li><a href="{% url 'mymap:index' %}">Home</a></li>
-        <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
-        {% if user.is_authenticated %}
-        <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
-        <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
-        {% else %}
-        <li class="nav-item">
-        <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
-        <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
-        {% endif %}
-      </ul>
-  </nav>
+<!---->
 
 <div class="container">
-<div class="loginPage_contents">
-<h1 class="h3 loginPage_contents_title">Over View</h1> 
-<br><hr><br>
-<p>API使用フロート</p>
-</div></div>
+    <div class="loginPage_contents">
+        <h1 class="h3 loginPage_contents_title">over view</h1> 
+        <br><hr><br>
+    </div>
+</div>
+        
 
+<footer>
+	<address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+</footer>
 
-
-
-  <footer>
-    <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
-  </footer>
-  
-
-  </body>
-  </html>
+　
+　
+</body>
+<html>
