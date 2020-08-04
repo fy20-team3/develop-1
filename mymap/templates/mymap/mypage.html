@@ -1,33 +1,25 @@
 <!doctype html>
 <html>
-<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!--背景色設定
-<div class="deepFocus">-->
-<!--タイトル名設定-->
-<title>mypage</title>
-
-
 {% load static %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <!-- 作成したCSS適応 -->
-<link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
-<link rel="stylesheet"  type="text/css" href="{% static 'css/mymap.css' %}">
+<!-- 作成したCSS適応 -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/traveltop.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}">
 
 <!--java script-->　
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
 <script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+<!-- Required meta tags ディスクリプションは検索した際にタイトルの下に説明文として表示-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
+<!--タイトル名設定-->
+<title>mypage</title>
  <body>
 
  <!--メニューバー設定-->
@@ -51,7 +43,7 @@
         <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
         {% if user.is_authenticated %}
         <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
-        <li><a href="../../face_r/form">Travel planning</a></li>
+        <li><a class="nav-item nav-link" href="../../form">Travel planning</a></li>
         <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
         {% else %}
         <li class="nav-item">
@@ -61,25 +53,27 @@
       </ul>
   </nav>
 
- 
-<!--題名-->
+
 <div class="container">
    <div class="loginPage_contents">
    <h1 class="h3 loginPage_contents_title">My Page</h1> 
    <br><hr><br>
    <p><h4>Travel planning</h4></p>
 </div>
-  
-  
+
 <!--ボタン-->
-<div class="basicBox"><a href="../../face_r/form">
+<div class="basicBox"><a href="{% url 'mymap:index' %}">
   start 
   <svg width="130" height="65" viewBox="0 0 130 65" xmlns="http://www.w3.org/2000/svg">
     <rect x='0' y='0' fill='none' width='130' height='65'/>
   </svg>
 </a></div>
-  
-                 
+
+
+
+
+
+
 <!--下記からマップ関係-->
 <!--マップの大きさ変更-->
 <div id="map" style="width:500px; height:400px; "></div>
@@ -116,6 +110,9 @@ window.onload = function(){
    });
 }
 </script>
+</div>
+</div>
+
 
 <footer>
    <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
