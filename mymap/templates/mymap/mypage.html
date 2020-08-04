@@ -51,6 +51,7 @@
         <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
         {% if user.is_authenticated %}
         <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+        <li><a href="../../face_r/form">Travel planning</a></li>
         <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
         {% else %}
         <li class="nav-item">
@@ -60,13 +61,24 @@
       </ul>
   </nav>
 
-
+ 
+<!--題名-->
 <div class="container">
    <div class="loginPage_contents">
    <h1 class="h3 loginPage_contents_title">My Page</h1> 
    <br><hr><br>
-   <p>旅行プラン一覧</p>
+   <p><h4>Travel planning</h4></p>
 </div>
+  
+  
+<!--ボタン-->
+<div class="basicBox"><a href="../../face_r/form">
+  start 
+  <svg width="130" height="65" viewBox="0 0 130 65" xmlns="http://www.w3.org/2000/svg">
+    <rect x='0' y='0' fill='none' width='130' height='65'/>
+  </svg>
+</a></div>
+  
                  
 <!--下記からマップ関係-->
 <!--マップの大きさ変更-->
