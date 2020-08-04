@@ -79,16 +79,6 @@
 }
 
 
-/*背景
-.deepFocus {
-  background-image: -webkit-linear-gradient(top, #EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
-  background-image: linear-gradient(-180deg, #EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%); }
-
-.greyHound {
-  background: #989898;
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), -webkit-radial-gradient(at 50% -100%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 270%), -webkit-radial-gradient(at 50% 2%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at 50% -100%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 270%), radial-gradient(at 50% 2%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
-  background-blend-mode: normal,multiply,multiply; }*/
 
 /*スライドショー*/
   .main_imgBox {
@@ -158,11 +148,11 @@
 /*ヘッダー*/
 	
 		 
-body {
+.body {
 		margin: 0;
 		padding: 0;
 		font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		background-color: #e6e6e6;
+		background-color: #ffffff;
 		letter-spacing : 0.2em;
 	 }
 
@@ -170,9 +160,9 @@ body {
 		width: 100%;
 		padding: 30px 4% 10px;
 		background-color: rgb(255, 255, 255);
-		position: fixed;
+		position: absolute;
 		top: 0;
-		display: flex;
+		display: none;
   		align-items: center;
 	}
 
