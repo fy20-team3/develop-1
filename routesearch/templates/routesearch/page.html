@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang=ja>
+    <head>
+        <meta charset="UTF-8">
+        <title>ルート検索</title>
+    </head>
+    <body>
+        <h1>ルート検索</h1>
+        <p>{{ route.0 }}</p>
+        <p>{{ route.1 }}</p>
+        {% for i in counter %}
+        <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route={{route.0}},{{route.1}},{{route.2}},{{route.3}}|color:0000ffff&width=200&height=200">
+        {% endfor %}
+        <!-- <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route=35.666104548381654,139.73185774868438,35.66471862664352,139.73139640873367|color:0000ffff&width=200&height=200"> -->
+    </body>
+</html>
