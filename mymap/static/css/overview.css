@@ -1,0 +1,105 @@
+/*フッダー*/
+footer{
+    font-size: 80%; /*フォントサイズの指定*/
+    width: 100%;    /*横幅の指定*/
+    text-align: center; /*文字の中央寄せ*/
+    padding-top: 10px;  /*文字上部の余白指定*/
+    padding-bottom: 10px;   /*文字下部の余白指定*/
+    background-color: #313131;  /*背景色の指定*/
+}
+footer address{
+    color: #fff;    /*文字色の指定*/
+    letter-spacing: 5px;    /*文字と文字の間隔をあける*/
+    font-style: normal; /*文字の斜体を取り消す*/
+}
+
+
+.grovalNavigation{
+	height: 100px;
+	text-align: center;
+	background-color: rgb(255, 253, 253);
+	color: rgb(8, 8, 8);
+	font-family: 'Montserrat Subrayada', sans-serif;
+	font-size: 50px;
+	position: relative;
+}
+
+/*メニューバーの設定*/
+.hamberger_line {
+    display: inline-block;
+    width: 36px;
+    height: 28px;
+    vertical-align: middle;
+    cursor: pointer;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 100;
+    transform: translateX(0);
+    transition: transform .5s;
+}
+
+.hamberger_line span {
+    display: inline-block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #000;
+    transition: all .5s;
+}
+
+.hamberger_line span:nth-of-type(1) {
+    top: 0;
+}
+
+.hamberger_line.open span:nth-of-type(1) {
+    transform: translateY(12px) rotate(-45deg);
+}
+
+.hamberger_line span:nth-of-type(2) {
+    top: 12px;
+}
+
+.hamberger_line.open span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.hamberger_line span:nth-of-type(3) {
+    bottom: 0;
+}
+
+.hamberger_line.open span:nth-of-type(3) {
+    transform: translateY(-12px) rotate(45deg);
+}
+
+.hamberger_list {
+    width: 250px;
+    height: 100%;
+    padding-top: 100px;
+    background-color: rgba(57, 57, 58, 0.8);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    transform: translateX(250px);
+	transition: all .5s;
+	font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI semibold", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic", "Segoe UI", Verdana, Meiryo, sans-serif;
+  	font-weight: bold;
+}
+
+.hamberger_list.open {
+    transform: translateX(0);
+}
+
+.hamberger_list li {
+    text-align: center;
+    padding: 10px 0;
+    list-style: none;
+}
+
+.hamberger_list a {
+    color: #fff;
+    text-decoration: none;
+}
