@@ -59,6 +59,7 @@
         <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
         {% if user.is_authenticated %}
         <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+        <li><a class="nav-item nav-link" href="../../form">Travel planning</a></li>
         <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
         {% else %}
         <li class="nav-item">
