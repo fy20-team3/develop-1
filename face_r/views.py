@@ -80,6 +80,9 @@ def scan(request):
 
     return render(request, 'face_r/scan.html', {'pcode': pcode, 'place': place})
 
+def form(request):
+    return render(request, 'face_r/photoform.html')
+
 def dbtest(request):
     #return HttpResponse('dbtest 始まるよ')
     # MySQL接続
