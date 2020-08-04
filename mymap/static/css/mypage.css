@@ -2,10 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #FDFDFD;
-  margin: 25px 0;
-}
+
 
 span.title {
   margin: 0 auto;
@@ -77,4 +74,5 @@ svg rect {
   -moz-animation-delay: 0.65s;
   -ms-animation-delay: 0.65s;
   }
+
 
