@@ -26,8 +26,8 @@ def viewspot(request):
     global result
 
     
-    if request.POST['num']:
-        addresscode = request.POST['num']
+    if request.POST.get('num'):
+        addresscode = request.POST.get('num')
 
     # if 'spot1' in request.POST:
     #     exsample = request.POST['spot1']
@@ -79,7 +79,15 @@ def viewspot(request):
         result.append(r.json()['Feature'][x]['Geometry']['Coordinates'])
 
     result = convert_1d_to_2d(result,14)
-    #print(result[0][0])
+    
+    for x in result:
+        # print("x:",x)
+        s=x[13]
+        l=s.split(',')
+        x.append(l[0])
+        x.append(l[1])
+        # print("x:",x)
+    
     
     #mapped_num = map(str, result) #格納される数値を文字列にする
     #result_string = ' '.join(mapped_num)
@@ -101,7 +109,7 @@ def hotelspot(request):
         spotdst = False
 
     spotdst = list(map(int,spotdst))
-    # print("spotdst:",spotdst)
+    print("spotdst:",spotdst)
     # print(result[spotdst[0]])
 
     gyosyucode = '0304'
@@ -155,6 +163,13 @@ def hotelspot(request):
     resulthotel = convert_1d_to_2d(resulthotel,14)
     #print(resulthotel[0][0])
 
+    for x in resulthotel:
+        # print("x:",x)
+        s=x[13]
+        l=s.split(',')
+        x.append(l[0])
+        x.append(l[1])
+        # print("x:",x)
 
     return render(request,'location/hotel.html',{'address': addresscode,'resulthotel':resulthotel})
 
@@ -173,17 +188,19 @@ def tripplan(request):
         hoteldst = False
 
     hoteldst = list(map(int,hoteldst))
-    # print("hoteldst:",hoteldst)
+    print("hoteldst:",hoteldst)
 
     hoteloutput = []
-    hoteloutput.append(resulthotel[hoteldet[0]])
+    hoteloutput.append(resulthotel[hoteldst[0]])
+    # for x in range(hoteldst):
+    #     hoteloutput.append(resulthotel[x])
 
     print(hoteloutput)
 
     spotoutput = []
     for x in range(len(spotdst)):
-        i = spotdst[x]
-        print(i)
+        i=spotdst[x]
+        print("i=",i)
         spotoutput.append(result[i])
 
     print(spotoutput)
