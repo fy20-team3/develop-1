@@ -23,62 +23,118 @@
 
     
 
-    <div class="container container-c">
-        <form name="form3">
-          <h4>選択した観光地</h4>
-          <div class="row">
-          {% for x in spot %}
-            <div class="col-sm-4 container-c">
-              <!-- <input type="checkbox" name="spot3" value= {{forloop.counter0}} > -->
-              <div class="card h-250 bg-info mb-3">
-                <div class="card-body text-white">
-                  <h5 class="card-title">{{x.1}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+    <div class="container container container-c">
+      <div class="left_wrap">
+        </div>
+          <form name="form3">
+            <h4>選択した観光地</h4>
+            <div class="row">
+            {% for x in spot %}
+              <div class="col-sm-4 container-c">
+                <!-- <input type="checkbox" name="spot3" value= {{forloop.counter0}} > -->
+                <div class="card h-250 bg-info mb-3">
+                  <div class="card-body text-white">
+                    <h5 class="card-title">{{x.1}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{x.4}}{{x.5}}</li>
+                    <li class="list-group-item">{{x.6}}{{x.7}}</li>
+                    <li class="list-group-item">{{x.8}}{{x.9}}</li>
+                    <li class="list-group-item">{{x.10}}{{x.11}}</li>
+                  </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{x.4}}{{x.5}}</li>
-                  <li class="list-group-item">{{x.6}}{{x.7}}</li>
-                  <li class="list-group-item">{{x.8}}{{x.9}}</li>
-                  <li class="list-group-item">{{x.10}}{{x.11}}</li>
-                </ul>
               </div>
+            {% endfor %}
             </div>
-          {% endfor %}
-          </div>
-        </form>
-    </div>
+          </form>
+        </div>
 
-    <!-- {% for x in spot %}
-        {{x}} <br><br>
-    {% endfor %} -->
+        <div class="container container-c">
+          <form name="form4">
+            <h4>選択したホテル</h4>
+            <div class="row">
+            {% for x in hotel %}
+              <div class="col-sm-4 container-c">
+                <!-- <input type="checkbox" name="spot4" value= {{forloop.counter0}} > -->
+                <div class="card h-250 bg-success mb-3">
+                  <div class="card-body text-white">
+                    <h5 class="card-title">{{x.1}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{x.4}}{{x.5}}</li>
+                    <li class="list-group-item">{{x.6}}{{x.7}}</li>
+                    <li class="list-group-item">{{x.8}}{{x.9}}</li>
+                    <li class="list-group-item">{{x.10}}{{x.11}}</li>
+                  </ul>
+                </div>
+              </div>
+            {% endfor %}
+            <br><br>
+            </div>
+          </form>
+      </div>
+
+      
+      <div class="right_wrap sticky_item">
+        <div class="posttop"> 
+          <!-- map size -->
+          <div id="map" style="width:400px; height:400px; "></div>
+          <!--yahoomapの呼び出し、表示-->
+          <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
+          <script type="text/javascript">
+            /*ここからがマップ設定*/
+            window.onload = function(){
+              var ymap = new Y.Map("map", {
+                configure : {
+                  doubleClickZoom : true,
+                  scrollWheelZoom : true,
+                  singleClickPan : true,
+                  dragging : true
+                }
+              });
+
+              /*初期値どこを表示するか  35.66572, 139.73100*/
+              ymap.drawMap(new Y.LatLng({{spot.0.15}},{{spot.0.14}}), 17, Y.LayerSetId.NORMAL);
+              
+              var markers = [];
+              {% for x in spot %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              {% endfor %}
+
+              {% for x in hotel %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              {% endfor %}
+
+              ymap.addFeatures(markers);
+             
+              
+
+              /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
+              ymap.addControl(new Y.HomeControl());
+              ymap.addControl(new Y.LayerSetControl());
+              ymap.addControl(new Y.SearchControl());
+              ymap.addControl(new Y.SliderZoomControlVertical());
+              ymap.addControl(new Y.CenterMarkControl());
+
+              window.bind("resize", function(e){
+                ymap.updateSize(max);
+              });
+            }
+
+          </script>
+          
+        </div>
+
+      </div>
+      
+    </div>
 
     
-    <div class="container container-c">
-        <form name="form4">
-          <h4>選択したホテル</h4>
-          <div class="row">
-          {% for x in hotel %}
-            <div class="col-sm-4 container-c">
-              <!-- <input type="checkbox" name="spot4" value= {{forloop.counter0}} > -->
-              <div class="card h-250 bg-success mb-3">
-                <div class="card-body text-white">
-                  <h5 class="card-title">{{x.1}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{x.4}}{{x.5}}</li>
-                  <li class="list-group-item">{{x.6}}{{x.7}}</li>
-                  <li class="list-group-item">{{x.8}}{{x.9}}</li>
-                  <li class="list-group-item">{{x.10}}{{x.11}}</li>
-                </ul>
-              </div>
-            </div>
-          {% endfor %}
-          <br><br>
-          </div>
-        </form>
-    </div>
-   </div>
+    <footer>
+      <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+    </footer>
     
     
     <!-- {% for x in hotel %}
