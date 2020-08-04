@@ -21,5 +21,6 @@ urlpatterns = [
     path('mymap/', include('mymap.urls')),
     path('face_r/', include('face_r.urls')),
     path('localmap/', include('localmap.urls')),
+    path('routesearch/', include('routesearch.urls')),
     path('', include('healthcheck.urls'))
 ]
