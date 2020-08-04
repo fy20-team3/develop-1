@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'mymap.apps.MymapConfig',
     'face_r.apps.FaceRConfig',
     'localmap.apps.LocalmapConfig',
+    'routesearch.apps.RoutesearchConfig',
     'healthcheck.apps.HealthcheckConfig',
     'django.contrib.admin',
     'django.contrib.auth',
