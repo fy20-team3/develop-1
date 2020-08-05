@@ -1,13 +1,17 @@
-<!doctype html>
+<!DOCTYPE  html>
 <html lang="ja">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <title>HPE Training</title>
-</head>
-<body>
-    <h1>Hello Scan</h1>
-    <p>{{ pcode|linebreaksbr  }}</p>
-    <p>{{ place|linebreaksbr  }}</p>
-    <a href="../../localmap?place=#place#">OKすか?</a>
-</body>
+    <title>Select To The Trip</title>
+  </head>
+  
+  <body>
+    <h1>行きたい場所はこちらです</h1>
+    <p>{{pcode|}}</p>
+    <p>{{place}}</p>
+    <form name="form" method="POST" action="../../localmap/viewspot">
+      <input type=hidden name="num" value={{pcode}}>
+      <input type=hidden name="spot" value={{place}}>
+      <a href="../../localmap/viewspot">OKすか?</a>
+  </body>
 </html>
