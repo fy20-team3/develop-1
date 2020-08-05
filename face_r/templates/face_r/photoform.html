@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+
+{% load static %}
+ <!-- 作成したCSS適応 -->
+<link rel="stylesheet"  type="text/css" href="{% static 'css/msr_serch.css' %}">
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,22 +19,46 @@
   </p>
   <p><input type="submit" name="save" value="保存" /></p>
 </form>
+=======
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>写真入力フォーム</title>
+  </head>
+
+  <body>
+
+    <form method="POST" action="../scan/">
+      {% csrf_token %}
+      <p>画像のURL：<input type="text" name="url" size="100"></p>
+      <p><input type="submit" value="OKすか?"></p>
+    </form>
+
+
+    <!--
+    <form method="POST" action="save.py" enctype="multipart/form-data">
+      <p>
+        <input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
+        <span style="color: #ff0000;" data-mce-style="color: #ff0000;"><div><img id="thumbnail" src=""></div></span>
+      </p>
+      <p><input type="submit" name="save" value="保存" /></p>
+    </form>
+>>>>>>> origin/fukui
  
-<script>
-$('#upfile').change(function(){
-  if (this.files.length > 0) {
-    // 選択されたファイル情報を取得
-    var file = this.files[0];
-    
-    // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    
-    reader.onload = function() {
-      $('#thumbnail').attr('src', reader.result );
-    }
-  }
-});
-</script>
-</body>
+    <script>
+      $('#upfile').change(function(){
+        if (this.files.length > 0) {
+          var file = this.files[0];
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function() {
+            $('#thumbnail').attr('src', reader.result );
+          }
+        }
+      });
+    </script>
+    -->
+  </body>
 </html>
+
