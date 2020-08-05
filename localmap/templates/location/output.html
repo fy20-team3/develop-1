@@ -23,13 +23,13 @@
 
     
 
-    <div class="container container container-c">
+    <div class="container container_w container-c">
       <div class="left_wrap">
         <form name="form3">
           <h4>選択した観光地</h4>
           <div class="row">
             {% for x in spot %}
-              <div class="col-sm-4 container-c">
+              <div class="col-sm container-c">
                 <!-- <input type="checkbox" name="spot3" value= {{forloop.counter0}} > -->
                 <div class="card h-250 bg-info mb-3">
                   <div class="card-body text-white">
@@ -54,7 +54,7 @@
             <h4>選択したホテル</h4>
             <div class="row">
               {% for x in hotel %}
-                <div class="col-sm-4 container-c">
+                <div class="col-sm container-c">
                   <!-- <input type="checkbox" name="spot4" value= {{forloop.counter0}} > -->
                   <div class="card h-250 bg-success mb-3">
                     <div class="card-body text-white">
@@ -98,24 +98,40 @@
               /*初期値どこを表示するか  35.66572, 139.73100*/
               ymap.drawMap(new Y.LatLng({{hotel.0.15}},{{hotel.0.14}}), 17, Y.LayerSetId.NORMAL);
               
-              var markers = [];
-              {% for x in spot %}
-              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-              {% endfor %}
+              // var markers = [];
+              // {% for x in spot %}
+              // markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              // {% endfor %}
 
-              {% for x in hotel %}
-              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-              {% endfor %}
-              ymap.addFeatures(markers);
+              // {% for x in hotel %}
+              // markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              // {% endfor %}
+              // ymap.addFeatures(markers);
              
               
 
               /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
-              ymap.addControl(new Y.HomeControl());
+              //ymap.addControl(new Y.HomeControl());
               ymap.addControl(new Y.LayerSetControl());
               ymap.addControl(new Y.SearchControl());
               ymap.addControl(new Y.SliderZoomControlVertical());
               ymap.addControl(new Y.CenterMarkControl());
+
+              var markers = [];
+              var i=0;
+              {% for x in spot %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+              markers[i].bindInfoWindow('{{x.1}}');
+              i=i+1;
+              {% endfor %}
+
+              i=0;
+              {% for x in hotel %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+              markers[i].bindInfoWindow('{{x.1}}');
+              i=i+1;
+              {% endfor %}
+              ymap.addFeatures(markers);
 
               window.bind("resize", function(e){
                 ymap.updateSize(max);
@@ -127,6 +143,12 @@
         </div>
       </div> 
       
+    </div>
+
+    <div class="container">
+      <h4>ルート地図</h4>    
+      <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route={{spot.0.15}},{{spot.0.14}},{{spot.1.15}},{{spot.1.14}}|color:0000ffff&width=200&height=200">
+
     </div>
 
     
