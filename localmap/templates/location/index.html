@@ -28,21 +28,23 @@
         観光地を最大１０個選択できます
       </div>
     </div>
+
     
-    <!-- <p>選択したスポット番号<span id="span1"></span></p>
+    
+    <p>選択したスポット番号<span id="span1"></span></p>
 
-    <input type="button" class="btn btn-info" value="ボタン" onclick="clickBtn1()"> -->
+    <!-- <input type="button" class="btn btn-info" value="ボタン" onclick="clickBtn1()">  -->
     
 
 
-    <div class="container container container-b">
+    <div class="container container_w container-b">
       <form action="{% url 'hotelspot' %}" method="POST" enctype="multipart/form-data" name="form1">
         <div class="left_wrap">
           <!-- <p>左側</p> -->
           <div class="row">
             {% for x in result %}
               <div class="col-sm-4 container-c">
-                <input type="checkbox" name="spot1" value= {{forloop.counter0}} >
+              <input type="checkbox" name="spot1" value= {{forloop.counter0}} onclick="clickBtn1()">
                 <div class="card h-250 bg-info mb-3">
                   <div class="card-body text-white">
                     <h5 class="card-title">{{x.1}}</h5>
@@ -54,65 +56,77 @@
                     <li class="list-group-item">{{x.8}}{{x.9}}</li>
                     <li class="list-group-item">{{x.10}}{{x.11}}</li>
                   </ul>
-                </div>            
+                </div> 
               </div>
             {% endfor %}
             </div>
             <br><br>
-        </div>
+          </div>
         
 
-
-        <!-- MAP -->
-        <div class="right_wrap sticky_item">
-          <div class="posright"> 
-            <!-- map size -->
-            <div id="map" style="width:400px; height:400px; "></div>
-            <!--yahoomapの呼び出し、表示-->
-            <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
-            <script type="text/javascript">
-              /*ここからがマップ設定*/
-              window.onload = function(){
-                var ymap = new Y.Map("map", {
-                  configure : {
-                    doubleClickZoom : true,
-                    scrollWheelZoom : true,
-                    singleClickPan : true,
-                    dragging : true
-                  }
-                });
-
+          <!-- MAP -->
+          <div class="right_wrap sticky_item">
+            <div class="posright"> 
+              <!-- map size -->
+              <div id="map" style="width:400px; height:400px; "></div>
+              <!--yahoomapの呼び出し、表示-->
+              <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
+              <script type="text/javascript">
+                /*ここからがマップ設定*/
+                window.onload = function(){
+                  var ymap = new Y.Map("map", {
+                    configure : {
+                      doubleClickZoom : true,
+                      scrollWheelZoom : true,
+                      singleClickPan : true,
+                      dragging : true
+                    }
+                  });
+                  
+                  /*初期値どこを表示するか  35.66572, 139.73100*/
+                  ymap.drawMap(new Y.LatLng({{result.0.15}},{{result.0.14}}), 14, Y.LayerSetId.NORMAL);
                
+                  
+                  /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
+                  //ymap.addControl(new Y.HomeControl());
+                  ymap.addControl(new Y.LayerSetControl());
+                  ymap.addControl(new Y.SearchControl());
+                  ymap.addControl(new Y.SliderZoomControlVertical());
+                  ymap.addControl(new Y.CenterMarkControl());
 
-                /*初期値どこを表示するか  35.66572, 139.73100*/
-                ymap.drawMap(new Y.LatLng({{result.0.15}},{{result.0.14}}), 17, Y.LayerSetId.NORMAL);
-                
-                var markers = [];
-                {% for x in result %}
-                markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-                {% endfor %}
-                ymap.addFeatures(markers);
-               
-                /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
-                ymap.addControl(new Y.HomeControl());
-                ymap.addControl(new Y.LayerSetControl());
-                ymap.addControl(new Y.SearchControl());
-                ymap.addControl(new Y.SliderZoomControlVertical());
-                ymap.addControl(new Y.CenterMarkControl());
+                  var markers = [];
+                  var i=0;
+                  {% for x in result %}
+                  markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+                  markers[i].bindInfoWindow('{{x.1}}');
+                  i=i+1;
+                  {% endfor %}
+                  ymap.addFeatures(markers);
 
-                window.bind("resize", function(e){
-                  ymap.updateSize(max);
-                });
-              }
+                  window.bind("resize", function(e){
+                    ymap.updateSize(max);
+                  });
 
-            </script>
+                  // const spot1 = document.form1.spot1;
+                  // for(let i=0; i < spot1.length; i++){
+                  //   if(spot1[i].checked){
+                  //     ymap.pmnTo(new Y.LatLng({{result.i.15}},{{result.i.14}}),true);
+                  //   }
+                  // }
+
+                }
+
+              </script>
             
+            </div>
           </div>
+        
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
+            ホテル選択へ
+          </button>
         </div>
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
-          ホテル選択へ
-        </button>
+
       </form>
     </div>
 
