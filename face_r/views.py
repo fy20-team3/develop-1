@@ -51,11 +51,11 @@ def scan(request):
         #data=img
     )
 
-    #code = 
+    faceparam_buf = response.json()
+    faceparam = faceparam_buf[0]
 
-    #pcode = rstrip(code)
-    pcode = '01100'
-    id = 10
+    id = (faceparam2['faceRectangle']['top'] * faceparam2['faceRectangle']['left'] * faceparam2['faceRectangle']['width'] * faceparam2['faceRectangle']['height']) % 1788 + 1
+    id = (int(id))
 
     cnt = MySQLdb.connect(
         host = 'mysql-server-60149727.mysql.database.azure.com',
@@ -78,7 +78,12 @@ def scan(request):
     sikuchoson = sikuchoson_tup[0]
 
     place = todoufuken + sikuchoson
-    #place = ''
+
+    sql = "SELECT code FROM citycode WHERE id=" + str(id) + ';';
+    db.execute(sql)
+    code_tup = db.fetchall()[0]
+    code = code_tup[0]
+    pcode = code[:-1]
 
     db.close()
     cnt.close()
