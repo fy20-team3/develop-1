@@ -80,6 +80,7 @@ def viewspot(request):
 
     result = convert_1d_to_2d(result,14)
     
+    
     for x in result:
         # print("x:",x)
         s=x[13]
