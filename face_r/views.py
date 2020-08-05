@@ -28,7 +28,9 @@ def scan(request):
     face_api_url = 'https://18ticket-face.cognitiveservices.azure.com/face/v1.0/detect'
 
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg'
-
+    
+     if request.POST.get('url'):
+        image_url = request.POST.get('url')
 
     headers = {
         #'Content-Type': 'application/octet-stream',
