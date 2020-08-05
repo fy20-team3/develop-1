@@ -17,9 +17,7 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.form, name='form'),
     path('scan/', views.scan, name='scan'),
-    path('form/', views.form, name='form'),
-    path('dbtest/', views.dbtest, name='dbtest'),
-    path('phototest/', views.phototest, name='phototest')
+    path('testface_r/', views.testface_r, name='testface_r'),
 ]
