@@ -54,7 +54,7 @@ def scan(request):
     faceparam_buf = response.json()
     faceparam = faceparam_buf[0]
 
-    id = (faceparam2['faceRectangle']['top'] * faceparam2['faceRectangle']['left'] * faceparam2['faceRectangle']['width'] * faceparam2['faceRectangle']['height']) % 1788 + 1
+    id = (faceparam['faceRectangle']['top'] * faceparam['faceRectangle']['left'] * faceparam['faceRectangle']['width'] * faceparam['faceRectangle']['height']) % 1788 + 1
     id = (int(id))
 
     cnt = MySQLdb.connect(
