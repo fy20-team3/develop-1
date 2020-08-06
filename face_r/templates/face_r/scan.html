@@ -20,8 +20,8 @@
     <p>{{place}}</p>
     <form name="form" method="POST" action="{% url 'localmap' %}" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type=hidden name="num" value={{pcode}}>
-      <input type=hidden name="spot" value={{place}}>
+      <input type=hidden name="num" value="{{pcode}}">
+      <input type=hidden name="spot" value="{{place}}">
       <a href="{% url 'localmap' %}">OK?</a>
     </form>
 
