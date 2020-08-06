@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type7="text/css" href="{% static 'style.css' %}">
+<link rel="stylesheet" type7="text/css" href="{% static 'css/style.css' %}">
 
 <!doctype html>
 <html lang="ja">
@@ -23,14 +23,13 @@
 
     
 
-    <div class="container container container-c">
+    <div class="container container_w container-c">
       <div class="left_wrap">
-        </div>
-          <form name="form3">
-            <h4>選択した観光地</h4>
-            <div class="row">
+        <form name="form3">
+          <h4>選択した観光地</h4>
+          <div class="row">
             {% for x in spot %}
-              <div class="col-sm-4 container-c">
+              <div class="col-sm container-c">
                 <!-- <input type="checkbox" name="spot3" value= {{forloop.counter0}} > -->
                 <div class="card h-250 bg-info mb-3">
                   <div class="card-body text-white">
@@ -46,41 +45,42 @@
                 </div>
               </div>
             {% endfor %}
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
+        <!-- </div> -->
 
         <div class="container container-c">
           <form name="form4">
             <h4>選択したホテル</h4>
             <div class="row">
-            {% for x in hotel %}
-              <div class="col-sm-4 container-c">
-                <!-- <input type="checkbox" name="spot4" value= {{forloop.counter0}} > -->
-                <div class="card h-250 bg-success mb-3">
-                  <div class="card-body text-white">
-                    <h5 class="card-title">{{x.1}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+              {% for x in hotel %}
+                <div class="col-sm container-c">
+                  <!-- <input type="checkbox" name="spot4" value= {{forloop.counter0}} > -->
+                  <div class="card h-250 bg-success mb-3">
+                    <div class="card-body text-white">
+                      <h5 class="card-title">{{x.1}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{x.2}}{{x.3}}</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{x.4}}{{x.5}}</li>
+                      <li class="list-group-item">{{x.6}}{{x.7}}</li>
+                      <li class="list-group-item">{{x.8}}{{x.9}}</li>
+                      <li class="list-group-item">{{x.10}}{{x.11}}</li>
+                    </ul>
                   </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{x.4}}{{x.5}}</li>
-                    <li class="list-group-item">{{x.6}}{{x.7}}</li>
-                    <li class="list-group-item">{{x.8}}{{x.9}}</li>
-                    <li class="list-group-item">{{x.10}}{{x.11}}</li>
-                  </ul>
                 </div>
-              </div>
-            {% endfor %}
-            <br><br>
+              {% endfor %}
+              <br><br>
             </div>
           </form>
+        </div>
       </div>
-
       
+      <!-- MAP-->
       <div class="right_wrap sticky_item">
-        <div class="posttop"> 
+        <div class="posright"> 
           <!-- map size -->
-          <div id="map" style="width:400px; height:400px; "></div>
+          <div id="map" style="width:400px; height:400px; "></div> 
           <!--yahoomapの呼び出し、表示-->
           <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
           <script type="text/javascript">
@@ -96,27 +96,42 @@
               });
 
               /*初期値どこを表示するか  35.66572, 139.73100*/
-              ymap.drawMap(new Y.LatLng({{spot.0.15}},{{spot.0.14}}), 17, Y.LayerSetId.NORMAL);
+              ymap.drawMap(new Y.LatLng({{hotel.0.15}},{{hotel.0.14}}), 17, Y.LayerSetId.NORMAL);
               
-              var markers = [];
-              {% for x in spot %}
-              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-              {% endfor %}
+              // var markers = [];
+              // {% for x in spot %}
+              // markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              // {% endfor %}
 
-              {% for x in hotel %}
-              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-              {% endfor %}
-
-              ymap.addFeatures(markers);
+              // {% for x in hotel %}
+              // markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
+              // {% endfor %}
+              // ymap.addFeatures(markers);
              
               
 
               /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
-              ymap.addControl(new Y.HomeControl());
+              //ymap.addControl(new Y.HomeControl());
               ymap.addControl(new Y.LayerSetControl());
               ymap.addControl(new Y.SearchControl());
               ymap.addControl(new Y.SliderZoomControlVertical());
               ymap.addControl(new Y.CenterMarkControl());
+
+              var markers = [];
+              var i=0;
+              {% for x in spot %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+              markers[i].bindInfoWindow('{{x.1}}');
+              i=i+1;
+              {% endfor %}
+
+              i=0;
+              {% for x in hotel %}
+              markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+              markers[i].bindInfoWindow('{{x.1}}');
+              i=i+1;
+              {% endfor %}
+              ymap.addFeatures(markers);
 
               window.bind("resize", function(e){
                 ymap.updateSize(max);
@@ -126,20 +141,21 @@
           </script>
           
         </div>
-
-      </div>
+      </div> 
       
+    </div>
+
+    <div class="container">
+      <h4>ルート地図</h4>    
+      <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route={{spot.0.15}},{{spot.0.14}},{{spot.1.15}},{{spot.1.14}}|color:0000ffff&width=200&height=200">
+
     </div>
 
     
     <footer>
       <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
     </footer>
-    
-    
-    <!-- {% for x in hotel %}
-        {{x}} <br><br>
-    {% endfor %} -->
+
   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS 
@@ -148,4 +164,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
+ 
 </html>

@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mymap/', include('mymap.urls')),
-    path('face_r/', include('face_r.urls')),
+    path('form/', include('face_r.urls')),
     path('localmap/', include('localmap.urls')),
     path('routesearch/', include('routesearch.urls')),
     path('', include('healthcheck.urls'))
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

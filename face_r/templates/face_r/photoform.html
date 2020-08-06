@@ -5,16 +5,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>写真入力フォーム</title>
   </head>
-
+ 
   <body>
-
+ 
     <form method="POST" action="scan/">
       {% csrf_token %}
       <p>画像のURL：<input type="text" name="url" size="100"></p>
       <p><input type="submit" value="OKすか?"></p>
     </form>
-
-
+ 
     <!--
     <form method="POST" action="save.py" enctype="multipart/form-data">
       <p>
@@ -39,4 +38,11 @@
     -->
   </body>
 </html>
+
+
+
+
+
+
+
 
