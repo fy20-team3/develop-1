@@ -7,11 +7,11 @@
   
   <body>
     <h1>行きたい場所はこちらです</h1>
-    <p>{{pcode|}}</p>
+    <p>{{pcode}}</p>
     <p>{{place}}</p>
-    <form name="form" method="POST" action="../../localmap/viewspot">
+    <form name="form" method="POST" action="../../localmap/">
       <input type=hidden name="num" value={{pcode}}>
       <input type=hidden name="spot" value={{place}}>
-      <a href="../../localmap/viewspot">OKすか?</a>
+      <a href="../../localmap/">OKすか?</a>
   </body>
 </html>
