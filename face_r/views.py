@@ -89,7 +89,7 @@ def scan(request):
 
     db.close()
     cnt.close()
-    return render(request, 'face_r/scan.html', {'pcode': pcode, 'place': place})
+    return render(request, 'face_r/scan.html', {'pcode': pcode, 'place': place, 'url': image_url})
 
 
 def form(request):

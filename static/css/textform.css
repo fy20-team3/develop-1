@@ -1,0 +1,100 @@
+.demo {
+	width: 500px;
+	margin: 0 auto;
+	padding: 10px 0;
+	font-family: sans-serif;
+	font-size: 20px;
+	color:#313131;
+}
+  .heading {
+	margin: 10px 0
+  }
+.demo3 .heading {
+	color: #313131;
+	text-align: center;
+	overflow: hidden;
+}
+.demo3 .heading span {
+	display: inline-block;
+	position: relative;
+}
+.demo3 .heading span:before,
+.demo3 .heading span:after {
+	content: "";
+	border-bottom: 2px solid #312131;
+	width: 45px;
+	margin: 0 15px;
+	position: absolute;
+	bottom: 13px;
+}
+.demo3 .heading span:before {
+	right: 100%;
+}
+.demo3 .heading span:after {
+	left: 100%;
+}
+footer{
+    font-size: 80%; /*フォントサイズの指定*/
+    width: 100%;    /*横幅の指定*/
+    text-align: center; /*文字の中央寄せ*/
+    padding-top: 10px;  /*文字上部の余白指定*/
+    padding-bottom: 10px;   /*文字下部の余白指定*/
+    background-color: #313131;  /*背景色の指定*/
+}
+footer address{
+    color: #fff;    /*文字色の指定*/
+    letter-spacing: 5px;    /*文字と文字の間隔をあける*/
+    font-style: normal; /*文字の斜体を取り消す*/
+}
+
+.cp_iptxt {
+	position: relative;
+	width: 80%;
+	margin: 40px 3%;
+}
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	letter-spacing: 1px;
+	padding-left: 4em;
+}
+.cp_iptxt input[type='text']:focus {
+	outline: none;
+}
+.ef {
+	padding: 4px 0;
+	border: 0;
+	border-bottom: 1px solid #1b2538;
+	background-color: transparent;
+}
+.ef ~ .focus_line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	transition: 0.4s;
+	background-color: #da3c41;
+}
+.ef:focus ~ .focus_line,
+.cp_iptxt.ef ~ .focus_line {
+	width: 100%;
+	transition: 0.4s;
+}
+.ef ~ label {
+	position: absolute;
+	z-index: -1;
+	top: 4px;
+	left: 0;
+	width: 100%;
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	color: #aaaaaa;
+}
+.ef:focus ~ label, .cp_iptxt.ef ~ label {
+	font-size: 12px;
+	top: -16px;
+	transition: 0.3s;
+	color: #da3c41;
+}
