@@ -2,16 +2,31 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <title>Select To The Trip</title>
+    <link rel="stylesheet" href="{% static 'css/textform.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 作成したCSS適応 -->
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+    <!--java script-->　
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+    <script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
+    <title>To The Trip</title>
   </head>
   
   <body>
-    <h1>行きたい場所はこちらです</h1>
+    <h1>おススメの場所はこちらです</h1>
+    <img src="{{url}}" alt="画像" title="{{url}}">
     <p>{{pcode}}</p>
     <p>{{place}}</p>
-    <form name="form" method="POST" action="../../localmap/">
-      <input type=hidden name="num" value={{pcode}}>
-      <input type=hidden name="spot" value={{place}}>
-      <a href="../../localmap/">OKすか?</a>
+    <form name="form" method="POST" action="{% url 'localmap' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type=hidden name="num" value="{{pcode}}">
+      <input type=hidden name="spot" value="{{place}}">
+      <a href="{% url 'localmap' %}">OK?</a>
+    </form>
+
+    <footer>
+      <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+    </footer>
   </body>
 </html>
