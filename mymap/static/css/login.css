@@ -40,4 +40,31 @@
         margin-top: 12vh;
      }
      
+/*API紹介文*/
+.box{
+   position: relative;
+}
+
+.box1{
+ 
+font-size: large;  
+font-family: -apple-system,BlinkMacSystemFont, Roboto, "Segoe UI semibold", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic", "Segoe UI", Verdana, Meiryo, sans-serif;
+margin: 0;
+position: relative;
+top: 50%;
+left: 50%;
+margin-right: 50%;
+transform: translate(-50%, -50%);
+color: black;
+ text-align: center;
+}
+
+
+.box1 p{
+   font-weight: bolder; 
+  
+}
+
+
+
 
