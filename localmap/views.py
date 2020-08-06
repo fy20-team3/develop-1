@@ -4,10 +4,10 @@ import requests
 
 #-------------------------------Global 変数------------------------------------------------------------------------------
 addresscode = 13103         #デフォルト東京都港区
-result = 0                       #観光地一覧格納
-resulthotel = 0                      #ホテル一覧格納
-spotdst = 0
-hoteldst = 0
+result = 0                  #観光地一覧格納
+resulthotel = 0             #ホテル一覧格納
+spotdst = 0                 #選択した観光地の数字格納
+hoteldst = 0                #選択したホテルの数字格納
 
 #-------------------------------1次元配列から2次元配列へ---------------------------------------------------------------------
 def convert_1d_to_2d(l, cols):    
@@ -47,9 +47,7 @@ def viewspot(request):
 
     r = requests.get(url,params=query)
     #print("response",r.json())
-    
-    # ido = r.json()['Feature'][0]['Geometry']['Coordinates']
-    # print(ido)
+
     result = []
     for x in range(r.json()['ResultInfo']['Count']):
         print("x: ",x)
@@ -78,10 +76,10 @@ def viewspot(request):
         result.append("緯度経度: ")
         result.append(r.json()['Feature'][x]['Geometry']['Coordinates'])
 
-    result = convert_1d_to_2d(result,14)
+    result = convert_1d_to_2d(result,14)  #1次元配列から2次元配列
     
     
-    for x in result:
+    for x in result:        #緯度経度分割
         # print("x:",x)
         s=x[13]
         l=s.split(',')
@@ -161,10 +159,9 @@ def hotelspot(request):
     #resulth_string = ' '.join(mapped_num)
     #print("resulth_string", resulth_string)
 
-    resulthotel = convert_1d_to_2d(resulthotel,14)
-    #print(resulthotel[0][0])
+    resulthotel = convert_1d_to_2d(resulthotel,14)      #1次元配列から2次元配列
 
-    for x in resulthotel:
+    for x in resulthotel:    #緯度経度分割
         # print("x:",x)
         s=x[13]
         l=s.split(',')
@@ -189,6 +186,8 @@ def tripplan(request):
         hoteldst = False
 
     hoteldst = list(map(int,hoteldst))
+   
+    print("spotdst:",spotdst)
     print("hoteldst:",hoteldst)
 
     hoteloutput = []
@@ -196,7 +195,7 @@ def tripplan(request):
     # for x in range(hoteldst):
     #     hoteloutput.append(resulthotel[x])
 
-    print(hoteloutput)
+    #print(hoteloutput)
 
     spotoutput = []
     for x in range(len(spotdst)):
@@ -204,13 +203,37 @@ def tripplan(request):
         print("i=",i)
         spotoutput.append(result[i])
 
-    print(spotoutput)
+    #print(spotoutput)
+
+    gcode = []
+    for x in range(len(spotoutput)):
+        if x==0:
+            gcode.append(spotoutput[x][15])
+            gcode.append(spotoutput[x][14])
+            gcode.append(spotoutput[x][1])
+        else:
+            gcode.append(spotoutput[x][15])
+            gcode.append(spotoutput[x][14])
+            gcode.append(spotoutput[x][1])
+            gcode.append(spotoutput[x][15])
+            gcode.append(spotoutput[x][14])
+            gcode.append(spotoutput[x][1])
+
+    for x in hoteloutput:
+        gcode.append(x[15])
+        gcode.append(x[14])
+        gcode.append(x[1])
+
+    
+    gcode = convert_1d_to_2d(gcode,6)
+    print(gcode)
+
 
     # print(resulthotel[hoteldst[0]])
 
     # print(result[spotdst[0]])
 
-    return render(request,'location/output.html',{'address': addresscode,'spot':spotoutput,'hotel':hoteloutput})
+    return render(request,'location/output.html',{'address': addresscode,'spot':spotoutput,'hotel':hoteloutput,'gcode':gcode})
 
 
 
