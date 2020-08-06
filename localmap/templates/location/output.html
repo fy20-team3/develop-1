@@ -15,18 +15,15 @@
   </head>
   
 
-  <body>
-    <div class="container-fluid img-hidden">
-      <h1>最終結果</h1>
-      <h3>住所コード{{ address }}のプラン</h3>
-    </div>
-
-    
+  <body class="bgcolor">
+    <div class="container-fluid img-hidden"></div>
+    <h1>最終結果</h1>
+    <h3>住所コード{{ address }}のプラン</h3>
 
     <div class="container container_w container-c">
       <div class="left_wrap">
         <form name="form3">
-          <h4>選択した観光地</h4>
+          <h4 class="box19">選択した観光地</h4>
           <div class="row">
             {% for x in spot %}
               <div class="col-sm container-c">
@@ -51,7 +48,7 @@
 
         <div class="container container-c">
           <form name="form4">
-            <h4>選択したホテル</h4>
+            <h4 class="box19">選択したホテル</h4>
             <div class="row">
               {% for x in hotel %}
                 <div class="col-sm container-c">
@@ -125,7 +122,7 @@
               i=i+1;
               {% endfor %}
 
-              i=0;
+              
               {% for x in hotel %}
               markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
               markers[i].bindInfoWindow('{{x.1}}');
@@ -145,10 +142,12 @@
       
     </div>
 
-    <div class="container">
-      <h4>ルート地図</h4>    
-      <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route={{spot.0.15}},{{spot.0.14}},{{spot.1.15}},{{spot.1.14}}|color:0000ffff&width=200&height=200">
-
+    <div class="container container-b">
+      <h4 class="box19">ルート地図</h4> <br>
+      {% for x in gcode %}
+        <h6> 「{{x.2}}」から「{{x.5}}」</h6>
+        <img width="200" height="200" src="https://map.yahooapis.jp/course/V1/routeMap?appid=dj00aiZpPTZ2eTFacW9oTHVMciZzPWNvbnN1bWVyc2VjcmV0Jng9MDY-&route={{x.0}},{{x.1}},{{x.3}},{{x.4}}|color:0000ffff&width=200&height=200">
+      {% endfor %}
     </div>
 
     
