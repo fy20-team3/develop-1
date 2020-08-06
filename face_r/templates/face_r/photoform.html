@@ -1,34 +1,94 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<title>写真入力フォーム</title>
-</head>
-<body>
-<form method="post" action="save.py" enctype="multipart/form-data">
-  <p>
-    <input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
-    <span style="color: #ff0000;" data-mce-style="color: #ff0000;"><div><img id="thumbnail" src=""></div></span>
-  </p>
-  <p><input type="submit" name="save" value="保存" /></p>
-</form>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <!--<link rel="stylesheet" href="{% static 'textform.css' %}">-->
+    <link rel="stylesheet" href="{% static 'css/textform.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 作成したCSS適応 -->
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+    <!--java script-->　
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+    <script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script> 
+    <title>To The Trip</title>
+  </head>
+
+  <body>
+
+    <div class="demo demo3">
+      <div class="heading"><span>写真入力フォーム</span></div>
+    </div>
+
+
+
+    <div class="cp_iptxt">
+      <form method="POST" action="{% url 'form:scan' %}">
+        <p><input type="submit" value="OK?"></p>
+        <input class="ef" type="text" name="url" size="20" placeholder="http://...">
+        <label>画像</label>
+        <span class="focus_line"></span>
+      </form>
+    </div>
+  
+
+
+    <!--メニューバー設定-->
+ <div class="hamberger_menu"> 
+  <!-- 三本線 -->
+  <div class="hamberger_line">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
  
-<script>
-$('#upfile').change(function(){
-  if (this.files.length > 0) {
-    // 選択されたファイル情報を取得
-    var file = this.files[0];
-    
-    // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    
-    reader.onload = function() {
-      $('#thumbnail').attr('src', reader.result );
-    }
-  }
-});
-</script>
-</body>
+  <!-- クリックしたときのメニュー -->
+  
+  <nav class="hamberger_list">
+      <ul>
+        <li><a href="{% url 'mymap:index' %}">Home</a></li>
+        <li><a href="{% url 'mymap:overview' %}">Overview</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+        <li><a class="nav-item nav-link" href="{% url 'form' %}">Travel planning</a></li>
+        <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+        <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+        {% endif %}
+      </ul>
+  </nav>
+ 
+</div></div>
+
+
+    <!--
+    <form method="POST" action="save.py" enctype="multipart/form-data">
+      <p>
+        <input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
+        <span style="color: #ff0000;" data-mce-style="color: #ff0000;"><div><img id="thumbnail" src=""></div></span>
+      </p>
+      <p><input type="submit" name="save" value="保存" /></p>
+    </form>
+ 
+    <script>
+      $('#upfile').change(function(){
+        if (this.files.length > 0) {
+          var file = this.files[0];
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function() {
+            $('#thumbnail').attr('src', reader.result );
+          }
+        }
+      });
+    </script>
+    -->
+    <footer>
+      <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
+    </footer>
+  </body>
 </html>
