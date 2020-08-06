@@ -29,7 +29,7 @@ def scan(request):
 
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg'
     
-     if request.POST.get('url'):
+    if request.POST.get('url'):
         image_url = request.POST.get('url')
 
     headers = {
