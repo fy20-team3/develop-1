@@ -1,38 +1,12 @@
-.demo {
-	width: 500px;
-	margin: 0 auto;
-	padding: 10px 0;
-	font-family: sans-serif;
-	font-size: 20px;
-	color:#313131;
+p {
+	text-align:center;
 }
-  .heading {
-	margin: 10px 0
-  }
-.demo3 .heading {
-	color: #313131;
-	text-align: center;
-	overflow: hidden;
+
+img{
+    width: 200px;
+    height: auto;
 }
-.demo3 .heading span {
-	display: inline-block;
-	position: relative;
-}
-.demo3 .heading span:before,
-.demo3 .heading span:after {
-	content: "";
-	border-bottom: 2px solid #312131;
-	width: 45px;
-	margin: 0 15px;
-	position: absolute;
-	bottom: 13px;
-}
-.demo3 .heading span:before {
-	right: 100%;
-}
-.demo3 .heading span:after {
-	left: 100%;
-}
+
 footer{
     font-size: 80%; /*フォントサイズの指定*/
     width: 100%;    /*横幅の指定*/

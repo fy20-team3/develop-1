@@ -144,3 +144,23 @@ LOGIN_URL = 'mymap:login'
 LOGIN_REDIRECT_URL = 'mymap:index'
 #LOGOUT_REDIRECT_URL = 'mymap:index'
 
+import logging
+
+# For debugging 
+#if DEBUG:
+#    # will output to your console
+#    logging.basicConfig(
+#        level = logging.DEBUG,
+#        format = '%(asctime)s %(levelname)s %(message)s',
+#        filename = '/my_log_file.log',
+#        filemode = 'a'
+#    )
+#else:
+#    # will output to logging file
+#    logging.basicConfig(
+#        level = logging.DEBUG,
+#        format = '%(asctime)s %(levelname)s %(message)s',
+#        filename = '/my_log_file.log',
+#        filemode = 'a'
+#    )
+#

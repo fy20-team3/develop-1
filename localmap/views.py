@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
+import logging
+logging.basicConfig(filename='/my_log_file.log',level=logging.DEBUG)
 
 #-------------------------------Global 変数------------------------------------------------------------------------------
 #addresscode = 13211      #デフォルト東京都港区
@@ -100,6 +102,7 @@ def viewspot(request):
 
     print("----------------観光地result.append完了-----------------------")
     print(result)
+    logging.debug("result {}",format(result))
     print("-------------HTMLへ出力---------------")
     return render(request,'location/index.html',{'address': addresscode[0],'addressname':addresscode[1],'result':result})
 
@@ -192,6 +195,7 @@ def hotelspot(request):
 
     print("----------------ホテルresulthotel.append完了-----------------------")
     print(resulthotel)
+    logging.debug("resulthotel {}".format(resulthotel))
 
     print("-------------HTMLへ出力---------------")
     return render(request,'location/hotel.html',{'address': addresscode[0],'addressname':addresscode[1],'resulthotel':resulthotel})
@@ -207,7 +211,10 @@ def tripplan(request):
 
     print("--------------GLOBAL 値　確認--------------------")
     print(result)
+    logging.debug("result {}".format(result))
     print(resulthotel)
+
+    logging.debug("resulthotel {}".format(resulthotel))
     print("spotdst : ",spotdst)
     print("------------------------------------------------")
 
@@ -236,8 +243,7 @@ def tripplan(request):
 
     print("-----------------hoteloutputにresulthotel[hoteldst[0]]を格納------------------")
     hoteloutput = []
-    print("hoteldst[0] :",hoteldst[0])
-    print("resulthotel[hoteldet[0]] :",resulthotel[hoteldst[0]])
+    logging.debug("hoteldst[0] : {}".format(hoteldst[0]))
     hoteloutput.append(resulthotel[hoteldst[0]])
     print("hoteloutput : ",hoteloutput)
     
