@@ -130,21 +130,11 @@
                   {% endfor %}
                   ymap.addFeatures(markers);
 
+                  // window.bind("resize", function(e){
+                  //   ymap.updateSize(max);
+                  // });
 
-                  // function clickBtn1(){
-                  //   // const arr0 = [];
-                  //   const arr1 = [];
-                  //   // const spot0 = document.form1.spot0;
-                  //   const spot1 = document.form1.spot1;
-
-                  //   for(let i=0; i < spot1.length; i++){
-                  //     if(spot1[i].checked){
-                  //       ymap.pmnTo(new Y.LatLng({{result.i.15}},{{result.i.14}}),true);
-                  //       //arr1.push(spot1[i].value);
-                  //     }
-                  //   }
-                  //   //document.getElementById("span1").textContent = arr1;
-                  // }
+                  
 
                 }
 
@@ -157,6 +147,7 @@
           <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}">
             ホテル選択へ
           </button>
+
         </div>
 
       </form>
