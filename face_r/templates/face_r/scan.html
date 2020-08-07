@@ -1,18 +1,55 @@
 <!DOCTYPE  html>
 <html lang="ja">
-{% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/textform.css' %}">
+  {% load static %}
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static css/textform.css %}">
+    <link rel="stylesheet" type="text/css" href="{% static css/login.css %}">
+    <link rel="stylesheet" type="text/css" href="{% static css/traveltop.css %}">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+    <script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <title>To The Trip</title>
+    <title>Specify an Image</title>
   </head>
   
   <body>
-    <h1>おススメの場所はこちらです{{url}}</h1>
-    <img src="{{url}}" alt="画像" title="{{url}}">
-    <p>{{pcode}}</p>
-    <p>{{place}}</p>
+
+    <div class="hamberger_menu">
+        
+      <div class="hamberger_line">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="hamberger_list">
+        <ul>
+          <li><a href="{% url 'mymap:index' %}">Home</a></li>
+          <li><a href="{% url 'mymap:overview' %}">Overview</a></li>            
+          {% if user.is_authenticated %}
+          <li><a class="nav-item nav-link" href="{% url 'mymap:mypage' %}">Mypage</a></li>
+          <li><a class="nav-item nav-link" href="../../form">Travel planning</a></li>
+          <li><a class="nav-item nav-link" href="{% url 'mymap:logout' %}">Logout</a></li>
+          {% else %}
+          <li class="nav-item">
+          <a class="nav-item nav-link" href="{% url 'mymap:login' %}">Login</a></li>
+          <li><a class="nav-item nav-link"  href="{% url 'mymap:signup' %}">Creat Account</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="container">
+        <div class="loginPage_contents">
+          <h1 class="h3 loginPage_contents_title"><h1>おススメの場所は{{place}}です</h1></h1>
+        </div>
+      </div>
+
+    <p>
+      <img src="{{url}}" alt="画像" title="{{url}}">
+    </p>
+
     <form name="form" method="POST" action="../../localmap/" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="hidden" name="num" value="{{pcode}}">
@@ -25,4 +62,3 @@
     </footer>
   </body>
 </html>
-
