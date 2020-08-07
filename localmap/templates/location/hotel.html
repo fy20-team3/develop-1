@@ -1,5 +1,12 @@
 {% load static %}
 <link rel="stylesheet" type7="text/css" href="{% static 'css/style.css' %}">
+<!-- 作成したCSS適応 -->
+<link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+ 
+<!--java script-->　
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+<script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
 
 <!doctype html>
 <html lang="ja">
@@ -19,7 +26,27 @@
   <body class="bgcolor">
     <div class="container-fluid img-hidden"></div>
     <h1>宿</h1>
-    <h3>住所コード{{ address }}の宿検索結果</h3>
+    <h3>{{ addressname }}({{ address }})の検索結果</h3>
+
+    <!--メニューバー設定-->
+    <div class="hamberger_menu">
+      <!-- 三本線 -->
+      <div class="hamberger_line">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- クリックしたときのメニュー -->
+  
+      <nav class="hamberger_list">
+        <ul>
+          
+        </ul>
+      </nav>
+ 
+    </div>
 
     <div class="container container-m">
       <div class="box17">
@@ -107,7 +134,7 @@
           </div>
 
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}">
             プラン出力画面へ
           </button>
           
