@@ -1,5 +1,12 @@
 {% load static %}
-<link rel="stylesheet" type7="text/css" href="{% static 'style.css' %}">
+<link rel="stylesheet" type7="text/css" href="{% static 'css/style.css' %}">
+<!-- 作成したCSS適応 -->
+<link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
+ 
+<!--java script-->　
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" defer></script>　
+<script  type="text/javascript" src="{% static 'js/hamberger_menu.js' %}"></script>
 
 <!doctype html>
 <html lang="ja">
@@ -16,14 +23,33 @@
 
   
 
-  <body>
-    <div class="container-fluid img-hidden">
-      <h1>宿</h1>
-      <h3>住所コード{{ city }}の宿検索結果</h3>
+  <body class="bgcolor">
+    <div class="container-fluid img-hidden"></div>
+    <h1>宿</h1>
+    <h3>{{ addressname }}({{ address }})の検索結果</h3>
+
+    <!--メニューバー設定-->
+    <div class="hamberger_menu">
+      <!-- 三本線 -->
+      <div class="hamberger_line">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- クリックしたときのメニュー -->
+  
+      <nav class="hamberger_list">
+        <ul>
+          
+        </ul>
+      </nav>
+ 
     </div>
 
     <div class="container container-m">
-      <div class="alert alert-info" role="alert">
+      <div class="box17">
         ホテルを１つ選択できます
       </div>
     </div>
@@ -33,7 +59,7 @@
     <input type="button" class="btn btn-info" value="ボタン" onclick="clickBtn2()"> -->
    
 
-    <div class="container container container-b">
+    <div class="container container_w container-b">
       <form action="{% url 'tripplan' %}" method="POST" enctype="multipart/form-data" name="form2">
         <div class="left_wrap">
           <div class="row">
@@ -56,59 +82,59 @@
             {% endfor %}
           </div>
           <br><br>
-        </div>
-
-        <!-- MAP -->
-        <div class="right_wrap sticky_item">
-          <div class="posright"> 
-            <!-- map size -->
-            <div id="map" style="width:400px; height:400px; "></div>
-            <!--yahoomapの呼び出し、表示-->
-            <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
-            <script type="text/javascript">
-              /*ここからがマップ設定*/
-              window.onload = function(){
-                var ymap = new Y.Map("map", {
-                  configure : {
-                    doubleClickZoom : true,
-                    scrollWheelZoom : true,
-                    singleClickPan : true,
-                    dragging : true
-                  }
-                });
-
-                /*初期値どこを表示するか  35.66572, 139.73100*/
-                ymap.drawMap(new Y.LatLng({{resulthotel.0.15}},{{resulthotel.0.14}}), 17, Y.LayerSetId.NORMAL);
-                
-                var markers = [];
-                {% for x in resulthotel %}
-                markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}})));
-                {% endfor %}
-                ymap.addFeatures(markers);
-               
-                
-
-                /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
-                ymap.addControl(new Y.HomeControl());
-                ymap.addControl(new Y.LayerSetControl());
-                ymap.addControl(new Y.SearchControl());
-                ymap.addControl(new Y.SliderZoomControlVertical());
-                ymap.addControl(new Y.CenterMarkControl());
-
-                window.bind("resize", function(e){
-                  ymap.updateSize(max);
-                });
-              }
-
-            </script>
-            
           </div>
-        </div>
 
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
-          プラン出力画面へ
-        </button>
+          <!-- MAP -->
+          <div class="right_wrap sticky_item">
+            <div class="posright"> 
+              <!-- map size -->
+              <div id="map" style="width:400px; height:400px; "></div>
+              <!--yahoomapの呼び出し、表示-->
+              <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPU5BV0htQU40M1lqSyZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-"></script>
+              <script type="text/javascript">
+                /*ここからがマップ設定*/
+                window.onload = function(){
+                  var ymap = new Y.Map("map", {
+                    configure : {
+                      doubleClickZoom : true,
+                      scrollWheelZoom : true,
+                      singleClickPan : true,
+                      dragging : true
+                    }
+                  });
+
+                  /*初期値どこを表示するか  35.66572, 139.73100*/
+                  ymap.drawMap(new Y.LatLng({{resulthotel.0.15}},{{resulthotel.0.14}}), 17, Y.LayerSetId.NORMAL);
+                  
+        
+                  /*ピン止め設定(y.homrcontrol)、上部の表示切替(y.layersetcontrol),場所検索バー(new Y.SearchControl)、サイドの縮尺調整バー(Y.SliderZoomControlVertical)、センターマーカー(Y.CenterMarkControl)*/
+                  //ymap.addControl(new Y.HomeControl());
+                  ymap.addControl(new Y.LayerSetControl());
+                  ymap.addControl(new Y.SearchControl());
+                  ymap.addControl(new Y.SliderZoomControlVertical());
+                  ymap.addControl(new Y.CenterMarkControl());
+
+                  var markers = [];
+                  var i=0;
+                  {% for x in resulthotel %}
+                  markers.push(new Y.Marker(new Y.LatLng({{x.15}},{{x.14}}),{title:"{{x.1}}"}));
+                  markers[i].bindInfoWindow('{{x.1}}');
+                  i=i+1;
+                  {% endfor %}
+                  ymap.addFeatures(markers);
+
+                }
+
+              </script>
+              
+            </div>
+          </div>
+
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}">
+            プラン出力画面へ
+          </button>
+          
       </form>
     </div>
 
