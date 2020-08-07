@@ -1,15 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
-import logging
-logging.basicConfig(filename='/my_log_file.log',level=logging.DEBUG)
-
-#-------------------------------Global 変数------------------------------------------------------------------------------
-#addresscode = 13211      #デフォルト東京都港区
-result = 0               #観光地一覧格納
-resulthotel = 0          #ホテル一覧格納
-spotdst = 0              #選択した観光地の数字格納
-hoteldst = 0             #選択したホテルの数字格納
 
 #-------------------------------1次元配列から2次元配列へ---------------------------------------------------------------------
 def convert_1d_to_2d(l, cols):    
@@ -22,7 +13,7 @@ def adcode(addressfromFace,addressname):
         addressname = '東京都港区'
     else:
         addresscode = addressfromFace
-        addressname = addressname
+        addressname = 'Sample' #addressname
     
     return addresscode,addressname
 
@@ -36,7 +27,7 @@ def viewspot(request):
     print("---------viewspot START-----------")
     API_Key = 'dj00aiZpPVhOQ1FXTGhJdlNEOSZzPWNvbnN1bWVyc2VjcmV0Jng9NGI-'
 
-    global result
+    #global result
 
     print("------------addresscode取得-------------------")
     addresfromFace = 00000
@@ -62,7 +53,7 @@ def viewspot(request):
     r = requests.get(url,params=query)
     #print("response",r.json())
 
-    result = []
+    result = [] #初期値
     for x in range(r.json()['ResultInfo']['Count']):
         print("x: ",x)
         
@@ -93,27 +84,20 @@ def viewspot(request):
     result = convert_1d_to_2d(result,14)  #1次元配列から2次元配列
     
     for x in result:        #緯度経度分割
-        # print("x:",x)
         s=x[13]
         l=s.split(',')
         x.append(l[0])
         x.append(l[1])
-        # print("x:",x)
 
+    request.session['Sresult'] = result #------------------------------------------------>sessionに格納
     print("----------------観光地result.append完了-----------------------")
     print(result)
-    logging.debug("result {}",format(result))
     print("-------------HTMLへ出力---------------")
     return render(request,'location/index.html',{'address': addresscode[0],'addressname':addresscode[1],'result':result})
 
 #-------------------------------ホテル一覧表示------------------------------------------------------------------------------
 def hotelspot(request):
     print("-----------------hotelspot START---------------------")
-
-    # global addresscode
-    global result
-    global resulthotel
-    global spotdst
 
     print("-----------------選択したスポットの番号格納---------------------")
     if 'spot1' in request.POST:
@@ -127,17 +111,18 @@ def hotelspot(request):
     print("----spotdst int型へ変更----")
     spotdst = list(map(int,spotdst))
     print("spotdst:",spotdst)
+    request.session['Sspotdst'] = spotdst #------------------------------------------------------->sessionに格納
 
     print("------------addresscode取得-------------------")
     addresscode = request.POST.getlist('button')
     print("adresscode : ",addresscode)
     l=addresscode[0].split(',')
+    print(l)
     addresscode.append(l[0])
     addresscode.append(l[1])
     del addresscode[0]
     print("addresscode :",addresscode[0])
     print("addressname :",addresscode[1])
-    
 
     gyosyucode = '0304'
 
@@ -158,7 +143,6 @@ def hotelspot(request):
     resulthotel = []
     for x in range(rh.json()['ResultInfo']['Count']):
         print("x: ",x)
-        # print("gc : ",rh.json()['Feature'][x]['Property']['Genre'][0]['Code'])
         resulthotel.append("名称: ")
         resulthotel.append(rh.json()['Feature'][x]['Name'])
         
@@ -186,37 +170,30 @@ def hotelspot(request):
     resulthotel = convert_1d_to_2d(resulthotel,14)      #1次元配列から2次元配列
 
     for x in resulthotel:    #緯度経度分割
-        # print("x:",x)
         s=x[13]
         l=s.split(',')
         x.append(l[0])
         x.append(l[1])
-        # print("x:",x)
 
+    request.session['Sresulthotel'] = resulthotel  #--------------------------------------------->sessionに格納
     print("----------------ホテルresulthotel.append完了-----------------------")
     print(resulthotel)
-    logging.debug("resulthotel {}".format(resulthotel))
-
     print("-------------HTMLへ出力---------------")
     return render(request,'location/hotel.html',{'address': addresscode[0],'addressname':addresscode[1],'resulthotel':resulthotel})
 
 #-------------------------------旅行プラン出力------------------------------------------------------------------------------
 def tripplan(request):
     print("-------------------tripplan START---------------------")
-    # global addresscode
-    global result
-    global resulthotel
-    global spotdst
-    global hoteldst
 
-    print("--------------GLOBAL 値　確認--------------------")
-    print(result)
-    logging.debug("result {}".format(result))
-    print(resulthotel)
+    result = request.session['Sresult']
+    print("result :",result)
 
-    logging.debug("resulthotel {}".format(resulthotel))
-    print("spotdst : ",spotdst)
-    print("------------------------------------------------")
+    resulthotel = request.session['Sresulthotel']
+    print("resulthotel :",resulthotel)
+
+    spotdst = request.session['Sspotdst']
+    print("spotdst : ",spotdst)   
+
 
     print("------------addresscode取得-------------------")
     addresscode = request.POST.getlist('button')
@@ -243,7 +220,8 @@ def tripplan(request):
 
     print("-----------------hoteloutputにresulthotel[hoteldst[0]]を格納------------------")
     hoteloutput = []
-    logging.debug("hoteldst[0] : {}".format(hoteldst[0]))
+    print("hoteldst[0] :",hoteldst[0])
+    print("resulthotel[hoteldet[0]] :",resulthotel[hoteldst[0]])
     hoteloutput.append(resulthotel[hoteldst[0]])
     print("hoteloutput : ",hoteloutput)
     
@@ -254,6 +232,7 @@ def tripplan(request):
         i=spotdst[x]
         print("i=",i)
         spotoutput.append(result[i])
+        #spotoutput.append(result[i])
 
     print("spotdst : ",spotoutput)
 
