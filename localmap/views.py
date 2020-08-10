@@ -102,8 +102,8 @@ def hotelspot(request):
     print("-----------------選択したスポットの番号格納---------------------")
     if 'spot1' in request.POST:
         spotdst = request.POST.getlist('spot1')
-    else:
-        spotdst = False
+    # else:
+    #     spotdst = False
 
     print("----spotdst 原型----")
     print("spotdst :",spotdst)
