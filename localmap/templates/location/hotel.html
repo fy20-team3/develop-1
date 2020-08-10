@@ -65,7 +65,7 @@
           <div class="row">
             {% for x in resulthotel %}
               <div class="col-sm-4 container-c">
-                <input type="radio" name="spot2" value={{forloop.counter0}} >
+                <input type="radio" name="spot2" value={{forloop.counter0}} onclick="clickBtn2()" >
                 <div class="card h-250 bg-success mb-3">
                   <div class="card-body text-white">
                     <h5 class="card-title">{{x.1}}</h5>
@@ -131,7 +131,7 @@
           </div>
 
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}" disabled>
             プラン出力画面へ
           </button>
           
@@ -141,16 +141,28 @@
 
     <script>
       function clickBtn2(){
-        let str = "";
+        //let str = "";
         const spot2 = document.form2.spot2;
+        var element;
+        var count = 0;
 
         for(let i=0; i < spot2.length; i++){
           if(spot2[i].checked){
-            str = spot2[i].value;
-            break;
+            count++;
+            // arr2.push(spot1[i].value);
           }
         }
-        document.getElementById("span2").textContent = str;
+
+        if(count != 0){
+          element = document.getElementById("button");
+          element.disabled = false;
+        }else{
+          element = document.getElementById("button");
+          element.disabled = true;
+          alert("1つ以上選択してください")
+        }
+        
+        //document.getElementById("span2").textContent = str;
       }
     </script>
 
