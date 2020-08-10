@@ -27,7 +27,6 @@ def viewspot(request):
     print("---------viewspot START-----------")
     API_Key = 'dj00aiZpPVhOQ1FXTGhJdlNEOSZzPWNvbnN1bWVyc2VjcmV0Jng9NGI-'
 
-    #global result
 
     print("------------addresscode取得-------------------")
     addresfromFace = 00000
