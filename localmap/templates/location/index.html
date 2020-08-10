@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <title>Select Spot</title>
+
   </head>
 
   
@@ -144,7 +145,7 @@
           </div>
         
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="{{address}},{{addressname}}" disabled>
             ホテル選択へ
           </button>
 
@@ -155,31 +156,32 @@
 
     <script>
       function clickBtn1(){
-        // const arr0 = [];
-        const arr1 = [];
-        // const spot0 = document.form1.spot0;
+        //const arr1 = [];
+        var element;
         const spot1 = document.form1.spot1;
+        var count = 0;
 
         for(let i=0; i < spot1.length; i++){
           if(spot1[i].checked){
-            //ymap.pmnTo(new Y.LatLng({{result.i.15}},{{result.i.14}}),true);
-            arr1.push(spot1[i].value);
+            count++;
+            // arr1.push(spot1[i].value);
           }
         }
-        document.getElementById("span1").textContent = arr1;
+        if(count != 0){
+          element = document.getElementById("button");
+          element.disabled = false;
+        }else{
+          element = document.getElementById("button");
+          element.disabled = true;
+          alert("1つ以上選択してください")
+        }
+        // document.getElementById("span1").textContent = arr1;
       }
 
     </script>
     
     
-    <!--<p>{{ result | linebreaksbr }}</p>-->
-
-    <!-- <form action="{% url 'hotelspot' %}" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-primary btn-lg btn-block" id="button" name="button" value="送信">
-        ホテル選択へ
-      </button>
-    </form> -->
+    
   
     <footer>
       <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
