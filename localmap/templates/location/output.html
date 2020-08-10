@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type7="text/css" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" type7="text/css" href="{% static 'css/style.css' %}" media="all">
 <!-- 作成したCSS適応 -->
 <link rel="stylesheet"  type="text/css" href="{% static 'css/traveltop.css' %}">
  
@@ -164,6 +164,18 @@
       {% endfor %}
     </div>
 
+    <div class="container container-b">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="output()">
+        このプランを印刷する
+      </button>
+    </div>
+    
+    <script>
+      function output(){
+        window.print();
+      }
+    </script>
     
     <footer>
       <address>Copyright(C)2020 team青春18きっぷ,Allright Reserved.</address>
