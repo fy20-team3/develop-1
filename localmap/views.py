@@ -13,7 +13,7 @@ def adcode(addressfromFace,addressname):
         addressname = '東京都港区'
     else:
         addresscode = addressfromFace
-        addressname = 'Sample' #addressname
+        addressname = addressname
     
     return addresscode,addressname
 
